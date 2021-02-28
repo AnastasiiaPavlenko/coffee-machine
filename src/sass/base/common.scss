@@ -1,0 +1,21 @@
+html {
+  box-sizing: border-box;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Open Sans,Helvetica,Arial,sans-serif;
+  background-color: #fff;
+}
+
+textarea {
+  resize: none;
+}

@@ -1,0 +1,18 @@
+.header {
+    display: flex;
+    justify-content: center;
+    background: #121111;
+    height: 100px;
+    align-items: center;
+    position: sticky;
+    &-logo {
+        width: 250px;
+        height: fit-content;
+    }
+    &-heading {
+        font-weight: 300;
+        margin-left: 10px;
+        color: #fff;
+        align-self: flex-end;
+    }
+}
