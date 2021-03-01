@@ -11,10 +11,10 @@ const refs = {
 };
 
 const pngRoutes = {
-    "Empty glass": '../../images/empty-glass.png',
-    "Lemon Tea": '../../images/tea.png',
-    "Coffee": '../../images/coffee.png',
-    "Hot Chocolate": '../../images/chocolate.png'
+    "Empty glass": './images/empty-glass.png',
+    "Lemon Tea": './images/tea.png',
+    "Coffee": './images/coffee.png',
+    "Hot Chocolate": './images/chocolate.png'
 };
 
 let state = {
