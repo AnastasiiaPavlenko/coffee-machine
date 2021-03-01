@@ -44,6 +44,30 @@
             align-items: center;
             text-align: center;
         }
+        &--alert {
+            position: absolute;
+            box-shadow: 1px 3px 20px 0 lightgrey;
+            top: 80px;
+            left: -160px;
+            padding: 10px;
+            border: 1px solid red;
+            background-color: #fff;
+            border-radius: 20px;
+            height: 70px;
+            width: 200px;
+            font-size: 12px;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        &--drinkImg {
+            height: 160px;
+            position: absolute;
+            bottom: 80px;
+            left: 230px;
+            cursor: pointer;
+        }
         &--btn {
             position: absolute;
             width: 29px;
@@ -65,6 +89,21 @@
                 background-color: #94ce58;
                 left: 366px;
             }    
+        }
+    }
+    &-recipe {
+        background-color: #fff;
+        width: 300px;
+        left: 70vw;
+        position: absolute;
+        box-shadow: 1px 3px 20px 0 lightgrey;
+        border-radius: 20px;
+        display: none;
+        padding: 15px;
+        flex-direction: column;
+        &--step {
+            display: block;
+
         }
     }
     &-info {

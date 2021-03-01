@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
         <title>Virtual Coffeehouse</title>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+        <link rel="shortcut icon" type="image/jpg" href="./images/favicon.ico"/>
     </head>
 
     <body>
@@ -19,20 +18,19 @@
             <div class="main-background">
                 <div class="main-info">
                     Hello and welcome to the one and only virtual
-                    <span class="main-info--emphasized">Superdrug Coffeehouse</span>! Hover over colorful buttons to choose your drink &#128578;
+                    <span class="main-info--emphasized">Superdrug Coffeehouse</span>! Hover over the colourful buttons to choose your drink &#128578;
                 </div>
                 <div class="main-machine">
                     <img class="main-machine--img" src="./images/coffee-machine.png" alt="Coffee machine"/>
-                    <div data-drink="Coffee" class="main-machine--btn"></div>
-                    <div data-drink="Lemon Tea" class="main-machine--btn"></div>
-                    <div data-drink="Hot Chocolate" class="main-machine--btn"></div>
+                    <div data-drink="Coffee" id="COFFEE" class="main-machine--btn"></div>
+                    <div data-drink="Lemon Tea" id="LEMON_TEA" class="main-machine--btn"></div>
+                    <div data-drink="Hot Chocolate" id="HOT_CHOCOLATE" class="main-machine--btn"></div>
                     <div class="main-machine--power"></div>
                     <div class="main-machine--popup"></div>
+                    <div class="main-machine--alert"></div>
                 </div>
+                <div class="main-recipe"></div>
             </div>
         </main>
-
-        <div class="modal micromodal-slide" id="note-editor-modal" aria-hidden="true"></div>
     </body>
-
 </html>
