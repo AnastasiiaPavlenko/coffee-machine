@@ -1,5 +1,9 @@
 import { RECIPES } from './constants';
 const regeneratorRuntime = require("regenerator-runtime");
+import emptyGlass from '../../images/empty-glass.png';
+import lemonTea from '../../images/tea.png';
+import coffee from '../../images/coffee.png';
+import chocolate from '../../images/chocolate.png';
 
 const refs = {
     machine: document.querySelector(".main-machine"),
@@ -11,10 +15,10 @@ const refs = {
 };
 
 const pngRoutes = {
-    "Empty glass": './images/empty-glass.png',
-    "Lemon Tea": './images/tea.png',
-    "Coffee": './images/coffee.png',
-    "Hot Chocolate": './images/chocolate.png'
+    "Empty glass": emptyGlass,
+    "Lemon Tea": lemonTea,
+    "Coffee": coffee,
+    "Hot Chocolate": chocolate
 };
 
 let state = {
@@ -91,14 +95,14 @@ const handleDrinkButton = () => {
     }
 };
 const handleDrinkClick = () => {
-    const { machine, recipeBlock } = state;
+    const { machine, recipeBlock } = refs;
     machine.removeChild(event.currentTarget);
     recipeBlock.innerHTML = 'Hope you enjoyed this virtual Coffee Station! Feel free to order another drink and see you in a bit!';
     setTimeout(() => hideRecipeBlock(), 4000);
     state.isDrinkInProcess = false;
 };
 const hideRecipeBlock = () => {
-    const { recipeBlock } = state;
+    const { recipeBlock } = refs;
     recipeBlock.innerHTML = "";
     recipeBlock.style.display = "none";
 };
