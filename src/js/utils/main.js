@@ -83,6 +83,7 @@ const handleDrinkButton = () => {
         showRecipeContent();
 
         const addDrinkPicture = () => {
+            const { machine } = refs;
             for (const key in pngRoutes) {
                 if (key == chosenDrink) {
                     drinkPng.setAttribute("src", pngRoutes[key]);
