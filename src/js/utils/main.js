@@ -9,7 +9,9 @@ const refs = {
     machine: document.querySelector(".main-machine"),
     buttons: document.querySelectorAll(".main-machine--btn"),
     powerButton: document.querySelector(".main-machine--power"),
-    popupOnHover: document.querySelector(".main-machine--popup"),
+    powerModal: document.querySelector("#modal-power"),
+    closeBtn: document.querySelectorAll('.close'),
+    instructionsModal: document.querySelector('#modal-instructions'),
     alertPopup: document.querySelector(".main-machine--alert"),
     recipeBlock: document.querySelector(".main-recipe")
 };
@@ -26,39 +28,27 @@ let state = {
     isDrinkInProcess: false
 };
 
-const onMouseOver = () => {
-    const { popupOnHover } = refs;
-    const chosenDrink = event.currentTarget.getAttribute("data-drink");
-    popupOnHover.style.display = "flex";
-    const content = document.createTextNode(`Press me to order ${chosenDrink}`);
-    popupOnHover.appendChild(content);
-};
-
-const onMouseOut = () => {
-    const { popupOnHover } = refs;
-    popupOnHover.style.display = "none";
-    popupOnHover.firstChild.remove();
-};
-
 const handleDrinkButton = () => {
-    const { alertPopup, machine, recipeBlock } = refs;
+    const { alertPopup, machine, recipeBlock, powerModal, instructionsModal } = refs;
     const chosenDrink = event.currentTarget.getAttribute("data-drink");
     const drinkId = event.currentTarget.getAttribute("id");
-    const powerButtonAlert = document.createTextNode("Oops.. seems like you forgot to switch on the Coffee Machine! Press the red button =>");
-    const drinkInProcessAlert = document.createTextNode("Please wait, your drink is being made. You can order another one right after!");
+    const drinkInProcessAlert = document.createTextNode("Please take your current drink first. You can order another one right after!");
     const drinkMessage = document.createTextNode(`While you are waiting for your delicious drink here is a ${chosenDrink} recipe: `);
     const hidePopup = () => {
         alertPopup.style.display = "none";
         alertPopup.firstChild.remove();
     };
     if (state.isDrinkInProcess == true) {
-        alertPopup.appendChild(drinkInProcessAlert);
+        if (alertPopup.hasChildNodes()) {
+            alertPopup.firstChild.remove();
+            alertPopup.appendChild(drinkInProcessAlert);
+        } else {
+            alertPopup.appendChild(drinkInProcessAlert);
+        }
         alertPopup.style.display = "flex";
         setTimeout(hidePopup, 5000);
     } else if (state.isPowerOn !== true) {
-        alertPopup.appendChild(powerButtonAlert);
-        alertPopup.style.display = "flex";
-        setTimeout(hidePopup, 5000);
+        powerModal.style.display = "block";
     } else {
         state.isDrinkInProcess = true;
         const drinkPng = document.createElement("img");
@@ -67,18 +57,35 @@ const handleDrinkButton = () => {
         machine.appendChild(drinkPng);
         recipeBlock.style.display = "flex";
         recipeBlock.appendChild(drinkMessage);
-        const showRecipeContent = () => {
+        instructionsModal.style.display = "block";
+
+        const showRecipeContent = async () => {
+            const delay = async (delay) => new Promise(next => setTimeout(next, delay));
+            const chain = async (a, ..._) => {
+                if (!(a instanceof Function)) return;
+                await a();
+                console.log(a);
+                return chain(..._);
+            };
+            const todo = [];
             for (const drink in RECIPES) {
                 if (drink === drinkId) {
                     for (let i = 0; i < RECIPES[drink].length; i++) {
                         let recipeStep = document.createElement("div");
                         recipeStep.setAttribute("class", "main-recipe--step");
                         recipeStep.innerHTML += (i + 1) + ". " + RECIPES[drink][i];
-                        setTimeout(() => recipeBlock.appendChild(recipeStep), i * 2000);
+                        todo.push(async () => {
+                            await delay(2000);
+                            recipeBlock.appendChild(recipeStep);
+                        });
                     }
                 }
             }
-            setTimeout(() => addDrinkPicture(), 7000);
+            todo.push(async () => {
+                await delay(2000);
+                addDrinkPicture();
+            });
+            return chain(...todo);
         };
         showRecipeContent();
 
@@ -91,22 +98,24 @@ const handleDrinkButton = () => {
                 }
             }
             recipeBlock.innerHTML = "Your drink is ready! Click on it to drink it! :)";
+            document.querySelector(".close-instructions").style.display = "block";
             document.querySelector(".main-machine--drinkImg").addEventListener("click", handleDrinkClick);
         };
     }
 };
+const closeModal = () => {
+    const { powerModal, instructionsModal } = refs;
+    powerModal.style.display = "none";
+    instructionsModal.style.display = "none";
+};
 const handleDrinkClick = () => {
     const { machine, recipeBlock } = refs;
     machine.removeChild(event.currentTarget);
-    recipeBlock.innerHTML = 'Hope you enjoyed this virtual Coffee Station! Feel free to order another drink and see you in a bit!';
-    setTimeout(() => hideRecipeBlock(), 4000);
+    recipeBlock.innerHTML = "";
+    document.querySelector(".close-instructions").style.display = "none";
     state.isDrinkInProcess = false;
 };
-const hideRecipeBlock = () => {
-    const { recipeBlock } = refs;
-    recipeBlock.innerHTML = "";
-    recipeBlock.style.display = "none";
-};
+
 const handlePowerButton = () => {
     state.isPowerOn !== true
         ? (state.isPowerOn = true,
@@ -115,13 +124,16 @@ const handlePowerButton = () => {
             event.currentTarget.style.backgroundColor = "red");
 };
 
-refs.buttons.forEach(button => {
-    button.addEventListener("mouseover", onMouseOver);
-});
-refs.buttons.forEach(button => {
-    button.addEventListener("mouseout", onMouseOut);
+refs.closeBtn.forEach(button => {
+    button.addEventListener("click", closeModal);
 });
 refs.buttons.forEach(button => {
     button.addEventListener("click", handleDrinkButton);
 });
 refs.powerButton.addEventListener("click", handlePowerButton);
+
+window.onclick = function (event) {
+    if (event.target == refs.powerModal) {
+        refs.powerModal.style.display = "none";
+    }
+}

@@ -18,7 +18,9 @@
             <div class="main-background">
                 <div class="main-info">
                     Hello and welcome to the one and only virtual
-                    <span class="main-info--emphasized">Superdrug Coffeehouse</span>! Hover over the colourful buttons to choose your drink &#128578;
+                    <br>
+                    <span class="main-info--emphasized">Superdrug Coffeehouse</span>!
+                    <br>Press the buttons to choose your drink &#128578;
                 </div>
                 <div class="main-machine">
                     <img class="main-machine--img" src="./images/coffee-machine.png" alt="Coffee machine"/>
@@ -26,11 +28,42 @@
                     <div data-drink="Lemon Tea" id="LEMON_TEA" class="main-machine--btn"></div>
                     <div data-drink="Hot Chocolate" id="HOT_CHOCOLATE" class="main-machine--btn"></div>
                     <div class="main-machine--power"></div>
-                    <div class="main-machine--popup"></div>
                     <div class="main-machine--alert"></div>
                 </div>
-                <div class="main-recipe"></div>
+                <div class="main-instructions">
+                    <div>Press
+                        <span style="color: #ee008e;">pink</span>
+                        for COFFEE</div>
+                    <div>Press
+                        <span style="color: #94ce58;">green</span>
+                        for LEMON TEA</div>
+                    <div>Press
+                        <span style="color:#CD853F;">brown</span>
+                        for HOT CHOCOLATE</div>
+                    <div>* but first press
+                        <span style="color:red">red</span>
+                        to turn on the Coffee Machine &#9749;</div>
+                </div>
             </div>
+            <!-- Power button modal alert window start -->
+            <div id="modal-power" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <div>Oops.. seems like you forgot to switch on the Coffee Machine!</div>
+                    <div>Please press the
+                        <span style="color:red">RED</span>
+                        button first :)</div>
+                </div>
+            </div>
+            <!-- Power button modal alert window end -->
+            <!-- Instructions modal window start -->
+            <div id="modal-instructions" class="modal">
+                <div class="modal-content">
+                    <div class="main-recipe"></div>
+                    <span class="close close-instructions">Got it! Thanks</span>
+                </div>
+            </div>
+            <!-- Instructions modal window end -->
         </main>
     </body>
 </html>
