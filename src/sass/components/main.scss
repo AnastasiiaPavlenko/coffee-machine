@@ -53,7 +53,6 @@
             position: absolute;
             box-shadow: 1px 3px 20px 0 lightgrey;
             padding: 10px;
-            border: 1px solid red;
             background-color: #fff;
             border-radius: 20px;
             height: 70px;
@@ -238,7 +237,7 @@
             font-size: 1.2rem;
             margin-top: 0;
             position: absolute;
-            left: 10vw;
+            left: 20vw;
             width: 30vw;
             top: 38%;
             transform: translateY(-38%);
@@ -249,14 +248,14 @@
             position: absolute;
             font-size: 20px;
             width: 30vw;
-            left: 10vw;
+            left: 20vw;
             padding: 20px;
         }
         &-machine {
             width: 500px;
             height: fit-content;
             position: absolute;
-            left: 45vw;
+            left: 50vw;
             top: 50%;
             transform: translateY(-50%);
             &--power {

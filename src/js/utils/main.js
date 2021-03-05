@@ -39,13 +39,15 @@ const handleDrinkButton = () => {
         alertPopup.firstChild.remove();
     };
     if (state.isDrinkInProcess == true) {
+        if (alertPopup.style.display == "flex") {
+            return;
+        } else { alertPopup.style.display = "flex"; }
         if (alertPopup.hasChildNodes()) {
             alertPopup.firstChild.remove();
             alertPopup.appendChild(drinkInProcessAlert);
         } else {
             alertPopup.appendChild(drinkInProcessAlert);
         }
-        alertPopup.style.display = "flex";
         setTimeout(hidePopup, 5000);
     } else if (state.isPowerOn !== true) {
         powerModal.style.display = "block";
